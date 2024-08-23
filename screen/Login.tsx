@@ -7,6 +7,7 @@ const Login = () => {
   return (
     <View className={`flex-1 justify-center ${!isDarkMode ? 'bg-gray-800' : 'bg-slate-100'} `}>
       <View>
+        <Text className='px-3 text-white text-center text-4xl'> Login Form</Text>
         <Form />
       </View>
     </View>
