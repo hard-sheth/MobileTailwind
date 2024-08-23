@@ -12,12 +12,12 @@ const DashboardIndex = () => {
     return (
         <Drawer.Navigator
         initialRouteName="Home" 
-        // screenOptions={{
-        //     headerShown: false,
-        // }}
+        screenOptions={{
+            headerShown: false,
+        }}
         drawerContent={(props) => <CustomDrawer {...props} />}
         >
-            <Drawer.Screen name="index" component={Dashboard} options={{
+            <Drawer.Screen name="Dashboard" component={Dashboard} options={{
           drawerIcon: ({ color }) => (
             <Icon name="home-outline" size={24} color={color} />
           ),

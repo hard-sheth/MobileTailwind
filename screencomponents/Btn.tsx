@@ -22,8 +22,6 @@ type submitResetbtn<T extends submitResetbtnDetails> = T & (
 
 export default function Btn<T extends submitResetbtnDetails>({ type, text, bgColor, textColor, btnClick }: submitResetbtn<T>) {
 
-  console.log(`rounded bg-[${bgColor}] px-3 text-center text-[${textColor}] text-lg`, btnClick);
-
   return (
     <View>
       {
