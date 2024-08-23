@@ -1,10 +1,10 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import Screeninput from './Input'
-import { Controller, useForm } from 'react-hook-form'
-import Btn from './Btn'
+import { View, Text } from 'react-native';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import Screeninput from '../screencomponents/Input';
+import Btn from '../screencomponents/Btn';
 
-const Form = () => {
+const SignInForm = () => {
   const {
     control,
     handleSubmit,
@@ -70,4 +70,4 @@ const Form = () => {
   )
 }
 
-export default Form
+export default SignInForm
