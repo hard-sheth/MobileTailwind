@@ -1,13 +1,27 @@
-import { View, Text, useColorScheme, TouchableOpacity } from 'react-native'
+import { View, Text, useColorScheme, TouchableOpacity, Button } from 'react-native'
 import React from 'react'
 import Header from '../../screencomponents/CustomToggler';
 import AppText from '../../screencomponents/AppText';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { changeCustomNo, decreaseCount, increaseCount } from '../../store/appslicers/countSlice';
 
 const Profile = () => {
     const isDarkMode = useColorScheme() === 'dark';
+    const count = useAppSelector((state) => state.counter.count);
+    
+    const dispatch = useAppDispatch();
     return (
         <View className={`flex-1 ${!isDarkMode ? 'bg-gray-800' : 'bg-slate-100'} `}>
             <Header />
+         <View>
+      <AppText >Count: {count}</AppText>
+      <Button onPress={() => dispatch(increaseCount())} title="Increment" />
+      <Button onPress={() => dispatch(decreaseCount())} title="Decrement" />
+      <Button
+        onPress={() => dispatch(changeCustomNo(5))}
+        title="Increment by 5"
+      />
+    </View>
             <AppText appclassName='text-center text-xl font-bold' > My Profile</AppText>
             <View className='flex-row justify-evenly align-bottom mt-3 '>
         <AppText appclassName='text-start flex-1 text-base font-medium'>Full Name</AppText>

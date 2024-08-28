@@ -14,7 +14,7 @@ const reducers = {
   increaseCount(state: countState) {
     state.count = state.count + state.customNo;
   },
-  decreaseCount(state: countState) {
+  decreaseCount(state: countState) {    
     state.count = state.count - state.customNo;
   },
   changeCustomNo(state: countState, action: any) {
@@ -32,4 +32,5 @@ export const countSlice = createSlice({
 });
 
 export const {changeCustomNo, clearCount, decreaseCount, increaseCount} = countSlice.actions
+
 export default countSlice.reducer;

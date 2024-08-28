@@ -8,12 +8,7 @@
 //   count: number;
 // }
 
-import {combineReducers} from 'redux';
-import reducer from './appslicers/countSlice';
-import {persistReducer} from 'redux-persist';
-import storage from '@react-native-async-storage/async-storage';
-import persistStore from 'redux-persist/es/persistStore';
-import {configureStore} from '@reduxjs/toolkit';
+
 
 // // Define the initial state
 // const initialState: CounterState = { count: 0 };
@@ -48,24 +43,55 @@ import {configureStore} from '@reduxjs/toolkit';
 // export const persistor = persistStore(store);
 // export type RootState = ReturnType<typeof rootReducer>;
 
-const rootReducer = combineReducers({
-  app: reducer,
-});
+// const rootReducer = combineReducers({
+//   app: reducer,
+// });
+
+// const persistConfig = {
+//   key: 'Count',
+//   storage,
+// };
+
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
+// export const store = configureStore({
+//   reducer: persistedReducer,
+//   middleware: getDefaultMiddleware =>
+//     getDefaultMiddleware({
+//       serializableCheck: {
+//         ignoreActions: false,
+//       },
+//     }),
+// });
+
+// export const persistor = persistStore(store);
+
+
+import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
+import { persistReducer, persistStore } from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import rootReducer, { RootState } from './appslicers';
+
 
 const persistConfig = {
-  key: 'Count',
-  storage,
+  key: 'root',
+  storage: AsyncStorage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-export const store = configureStore({
+
+const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoreActions: false,
-      },
+      serializableCheck: false,
     }),
 });
 
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
+
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector = useSelector.withTypes<RootState>()
+
+export { store, persistor };
