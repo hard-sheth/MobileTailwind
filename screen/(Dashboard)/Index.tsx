@@ -17,12 +17,12 @@ const DashboardIndex = () => {
         }}
         drawerContent={(props) => <CustomDrawer {...props} />}
         >
+        <Drawer.Screen name="profile" component={Profile} />
             <Drawer.Screen name="Dashboard" component={Dashboard} options={{
           drawerIcon: ({ color }) => (
             <Icon name="home-outline" size={24} color={color} />
           ),
         }} />
-            <Drawer.Screen name="profile" component={Profile} />
         </Drawer.Navigator>
     )
 }
