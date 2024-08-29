@@ -8,6 +8,8 @@ import { Text, useColorScheme, View } from 'react-native';
 import DashboardIndex from './screen/(Dashboard)/Index';
 import { Provider } from 'react-redux';
 import { store} from './store';
+import BookOrder from './screen/(Dashboard)/Order';
+import OrderDetails from './screen/(Dashboard)/OrderBottom/[orderId]';
 // import { PersistGate } from 'redux-persist/integration/react';
 
 
@@ -24,6 +26,8 @@ function App(): React.JSX.Element {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="dashboard" component={DashboardIndex} />
         <Stack.Screen name="login" component={Login} />
+        <Stack.Screen name="orderDetail" component={OrderDetails} />
+        <Stack.Screen name="createOrder" component={BookOrder} />
         <Stack.Screen name="singup" component={Signup} />
       </Stack.Navigator>
     </NavigationContainer>
