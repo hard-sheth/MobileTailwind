@@ -1,4 +1,4 @@
-import { View, Text, useColorScheme, ScrollView } from 'react-native'
+import { View, useColorScheme, FlatList } from 'react-native'
 import React from 'react'
 import AppText from '../../../../screencomponents/AppText';
 import moment from 'moment';
@@ -62,16 +62,81 @@ const OrderDetails = ({ route, navigation }: any) => {
                 <AppText appclassName='text-base text-right font-bold w-24'>Qty</AppText>
                 <AppText appclassName='text-base font-bold w-20 text-right'>Pcs</AppText>
             </View>
-            <ScrollView>
-            {
-                Array.from({length:80},(_,item)=>(
-                    <List item={item+1}/>
-                ))
-            }
-            </ScrollView>
-            {/* <AppText>{orderId}</AppText> */}
+            <FlatList
+                data={
+                    Array.from({ length: 80 }, (_, index) => ({
+                        id: index.toString(), 
+                        title: `Item ${index + 1}`,
+                    })
+                    )
+                }
+                renderItem={List}
+                keyExtractor={item => item.id} // Unique key prop
+            />
         </View>
     )
 }
 
 export default OrderDetails
+
+/**
+import React, { useState, useEffect } from 'react';
+import { FlatList, View, ActivityIndicator } from 'react-native';
+import axios from 'axios';
+
+const FlatListExample = () => {
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`/api/data?page=${page}`);
+      setData((prevData) => [...prevData, ...response.data]);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (!loading) {
+      setPage((prevPage) => prevPage + 1);
+      fetchData();
+    }
+  };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    setPage(1);
+    setData([]);
+    fetchData().finally(() => setRefreshing(false));
+  };
+
+  return (
+    <FlatList
+      data={data}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item }) => <ListItem item={item} />}
+      onEndReached={handleLoadMore}
+      onEndReachedThreshold={0.5}
+      ListFooterComponent={
+        loading && (
+          <View style={{ padding: 10 }}>
+            <ActivityIndicator />
+          </View>
+        )
+      }
+      refreshing={refreshing}
+      onRefresh={handleRefresh}
+    />
+  );
+};
+
+export default FlatListExample;
+ */
+
