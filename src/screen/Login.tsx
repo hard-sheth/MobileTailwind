@@ -1,4 +1,4 @@
-import { View, Text, useColorScheme, ActivityIndicator } from 'react-native';
+import { View, Text, useColorScheme } from 'react-native';
 import React from 'react';
 import LoginForm from '../screenforms/Loginform';
 import Btn from '../screencomponents/Btn';
@@ -14,7 +14,6 @@ const Login = ({navigation}:any) => {
       <View className={`flex-1  justify-center`}>
         <Text className='px-3 text-white text-center text-4xl'> Login Form</Text>
         <LoginForm />
-      <Btn type='primary' text='Login With Google.' btnClick={()=>navigation.push('customlogin')} />
       </View>
     </View>
   )
